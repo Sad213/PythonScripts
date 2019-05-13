@@ -19,7 +19,8 @@ for line in datos:
     #3 Name|Address|Signal o MAC|-#|dBm
     #2 zona #:
     #1 0.0.0.0.0.0
-    if len(dato) == 4:
+    if len(dato) == 4 and "MOVISTAR" not in dato[0] \
+    and "ONO" not in dato[0] and "MiFibra" not in dato[0]:
         comprobar(dato[1])
     elif len(dato) == 3 and dato[1] != "Address":
         comprobar(dato[0])
