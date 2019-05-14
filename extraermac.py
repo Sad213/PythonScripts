@@ -1,17 +1,21 @@
 datos = open("listamacs.txt","r")
 datosfiltrados = open("filtrados.txt","a+")#Si no esta creado no crea el archivo
-#La opcion "a+" no extrai las mac pero no se porque no las filtraba
-datosfiltrados.close()
+#Opcion a+ lectura y escritura del fichero y si no esta creado se crea
+global lista
+#Se crea una lista con las posibles MAC que contenga filtrados.txt
+lista = datosfiltrados.read().split()
 
+#Funcion que comprueba si la MAC esta repetida y de no ser la añade al fichero
+#y a la lista
 def comprobar(dato):
-    datosfiltrados = open("filtrados.txt","r+")
-    test = datosfiltrados.read().split()#Lista de las macs filtradas
-    if dato in test:
+    global lista
+    if dato in lista:
         pass
     else:
         datosfiltrados.write(dato + "\n")
-        datosfiltrados.close()
-            
+        lista += [dato]
+
+#Obtiene las MACs y se las pasa a la funcion comprobar        
 for line in datos:
     dato = line.split()
     #len(dato)
@@ -24,6 +28,6 @@ for line in datos:
         comprobar(dato[1])
     elif len(dato) == 3 and dato[1] != "Address":
         comprobar(dato[0])
-            
+
 datosfiltrados.close()
 datos.close()
